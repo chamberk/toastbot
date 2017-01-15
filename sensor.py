@@ -1,11 +1,9 @@
 import RPi.GPIO as GPIO
 import time
 import sys
-
+import toast_request as toast
 
 loopcount = 0
-
-
 
 GPIO.setmode(GPIO.BCM)
 
@@ -57,12 +55,16 @@ while True:
 
 #Publish distance to some other thing
  toastCount = 0
- if distance > 700:
+ if distance > 3000:
   toastCount+=1
   print("TOAST IS DONEEEEEEEE")
+  toast.sendsms_task()
+  print("SMS SENT")
+  GPIO.cleanup()
+  break;
  else:
   toastCount = 0
 
 # clean up and log out
-GPIO.cleanup()
+#GPIO.cleanup()
 sys.exit()
