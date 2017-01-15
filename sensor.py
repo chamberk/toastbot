@@ -74,4 +74,4 @@ def toastLoop():
 
     # clean up and log out
     #GPIO.cleanup()
-    sys.exit()
+    #sys.exit()
