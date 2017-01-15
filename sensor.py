@@ -70,11 +70,11 @@ while True:
   # toast.sendsms_task()
   # print("SMS SENT")
   GPIO.cleanup()
-  break;
+  # break;
  else:
   toastCount = 0
   print("READY FOR NEW TOAST")
 
 # clean up and log out
 #GPIO.cleanup()
-sys.exit()
+# sys.exit()
