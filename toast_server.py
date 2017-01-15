@@ -55,13 +55,19 @@ def create_task():
     return jsonify({'task': task}), 201
 
 # send an sms to all phone numbers registered
+# curl -X POST  http://localhost:5000/sendsms
+# curl -X POST -H "Content-Type: application/json" -d '{"message": "who wants toast"}' http://localhost:5000/sendsms
 @app.route('/sendsms', methods=['POST'])
 def sendsms_task():
     client = TwilioRestClient(account_sid, auth_token)
 
+    msg = 'Toast is DONE!'
+    mJson = request.get_json()
+    if mJson is not None and 'message' in mJson:
+        msg = mJson['message']
     for pn in phoneNumbers:
 
-        message = client.messages.create(body="Toast is DONE!",
+        message = client.messages.create(body=msg,
             to='+'+str(pn['phoneNumber']),
             from_="+16783355213")
 
