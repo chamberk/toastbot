@@ -5,9 +5,6 @@ import toast_request as toast
 
 toastLoopBool = True
 
-while toastLoopBool:
-    toastLoop()
-
 # FUNCTIONS !!
 def toastLoop():
     loopcount = 0
@@ -73,5 +70,9 @@ def toastLoop():
       toastCount = 0
 
     # clean up and log out
-    #GPIO.cleanup()
+    GPIO.cleanup()
     #sys.exit()
+
+if __name__ == '__main__':
+  while toastLoopBool:
+    toastLoop()
