@@ -3,10 +3,11 @@ import time
 import sys
 import toast_request as toast
 
-TOTAL_TOAST = 0
+
 toastLoopBool = True
 # FUNCTIONS !!
 def toastLoop():
+    TOTAL_TOAST = 0
     loopcount = 0
 
     GPIO.setmode(GPIO.BCM)
@@ -67,7 +68,6 @@ def toastLoop():
     #  else:
     #   toastCount = 0
 
-    global TOTAL_TOAST
     print("waiting on toast")
 
     if TOTAL_TOAST == 0 and distance > 3000:
