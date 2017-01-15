@@ -3,6 +3,7 @@ import time
 import sys
 import toast_request as toast
 
+TOTAL_TOAST = 0
 toastLoopBool = True
 # FUNCTIONS !!
 def toastLoop():
@@ -66,6 +67,9 @@ def toastLoop():
     #  else:
     #   toastCount = 0
 
+    global TOTAL_TOAST
+    print("waiting on toast")
+
     if TOTAL_TOAST == 0 && distance > 3000:
       print('toast going in')
       TOTAL_TOAST+=1
@@ -86,7 +90,6 @@ def toastLoop():
     #sys.exit()
 
 if __name__ == '__main__':
-  TOTAL_TOAST=0
 
   while toastLoopBool:
     toastLoop()
