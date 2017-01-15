@@ -4,7 +4,6 @@ import sys
 import toast_request as toast
 
 toastLoopBool = True
-
 # FUNCTIONS !!
 def toastLoop():
     loopcount = 0
@@ -38,8 +37,6 @@ def toastLoop():
      time.sleep(0.1)
      GPIO.output(TRIG, False)
 
-
-
     # waiting the Echo
     # print("before pulse start")  # debug statement
      pulse_start = time.time()
@@ -58,21 +55,39 @@ def toastLoop():
      loopcount+=1
 
     #Publish distance to some other thing
-     toastCount = 0
-     if distance > 3000:
-      toastCount+=1
-      print("TOAST IS DONEEEEEEEE")
-      toast.sendsms_task()
-      print("SMS SENT")
-      GPIO.cleanup()
-      break;
-     else:
-      toastCount = 0
+    #  toastCount = 0
+    #  if distance > 3000:
+    #   toastCount+=1
+    #   print("TOAST IS DONEEEEEEEE")
+    #   toast.sendsms_task()
+    #   print("SMS SENT")
+    #   GPIO.cleanup()
+    #   break;
+    #  else:
+    #   toastCount = 0
+
+    if TOTAL_TOAST == 0 && distance > 3000:
+      print('toast going in')
+      TOTAL_TOAST+=1
+
+    if TOTAL_TOAST == 1 && distance > 3000:
+      print('your toast is done')
+      TOTAL_TOAST+=1
+      while TOTAL_TOAST > 1:
+        print('your toast is waiting')
+        TOTAL_TOAST+=1
+        if distance < 1000:
+          print('toaster ready for new toast')
+          TOTAL_TOAST = 0
+          break;
 
     # clean up and log out
     GPIO.cleanup()
     #sys.exit()
 
 if __name__ == '__main__':
+  TOTAL_TOAST=0
+
   while toastLoopBool:
     toastLoop()
+    GPIO.cleanup()
