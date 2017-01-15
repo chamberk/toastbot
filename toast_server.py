@@ -13,16 +13,16 @@ greetings = ["hello", "hey", "yo", "hi", "what up"]
 bot_greetings = ["howdy partner", "hiya pal", "hey buddy", "what's good homie?", "Good morning, Starshine. The Earth says hello!"]
 bot_random = ["Start your day the toast way", "Get ready for some bomb toast", "Noms are on the way"]
 bot_motivation = ["Teamwork makes the dreamwork!", "Get 'er done", "You can't have everything... Where would you put it?"]
-
+bot_stop = "no more toast"
 
 account_sid = "AC20bd86adfb5902d86362dcb908d40a01" # Your Account SID from www.twilio.com/console
-auth_token  = "its in slack"  # Your Auth Token from www.twilio.com/console
+auth_token  = "xxxx"  # Your Auth Token from www.twilio.com/console
 
 phoneNumbers = [
     {
         'id': 1,
         'name': u'Christine',
-        'phoneNumber': u'not in slack'
+        'phoneNumber': u'xxxx'
     }
 #    },
 #    {
@@ -100,10 +100,13 @@ def toastbot():
     if msg_final == False and "motivate" in message_body:
         index = random.randrange(0, len(bot_motivation))
         resp.message(bot_motivation[index])
+    elif msg_final == False and bot_stop in message_body:
+        number = number[1:len(number)]
+        delete_phone(number)
+        resp.message("You are now unsubscribed from toast bot updates.")
     else:
         index = random.randrange(0, len(bot_random))
         resp.message(bot_random[index])
-
 
     return str(resp)
 
