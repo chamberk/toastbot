@@ -1,5 +1,5 @@
 #!flask/bin/python
-from flask import Flask, jsonify
+from flask import Flask, jsonify,render_template, request,json
 from flask import abort
 from flask import request
 from twilio import twiml
@@ -44,15 +44,21 @@ def get_tasks():
 
 @app.route('/addPhoneNumber', methods=['POST'])
 def create_task():
+    print("before adding phone number")
     if not request.json or not 'phoneNumber' in request.json:
         abort(400)
-    task = {
-        'id': phoneNumbers[-1]['id'] + 1,
-        'name': request.json['name'],
-        'phoneNumber': request.json.get('phoneNumber', ""),
-    }
-    phoneNumbers.append(task)
-    return jsonify({'task': task}), 201
+    try:
+        task = {
+            'id': phoneNumbers[-1]['id'] + 1,
+            'name': request.json['name'],
+            'phoneNumber': str(int(request.json.get('phoneNumber', ""))),
+        }
+        phoneNumbers.append(task)
+        print("added data")
+        print(task)
+        return jsonify({'task': task}), 201
+    except ValueError:
+        abort(415)
 
 # send an sms to all phone numbers registered
 @app.route('/sendsms', methods=['POST'])
@@ -87,6 +93,32 @@ def toastbot():
         resp.message(bot_random[index])
 
     return str(resp)
+
+@app.route('/deletePhoneNumber/<string:task_id>', methods=['GET'])
+def delete_phone(task_id):
+    print(task_id)
+    task = [task for task in phoneNumbers if task['phoneNumber'] == task_id]
+    print('found task')
+    print(task)
+    if len(task) == 0:
+         abort(404)
+    phoneNumbers.remove(task[0])
+    return jsonify({'status': 'deleted successfully'})
+
+@app.route('/')
+def signUp():
+    print request.args.get('name', "")
+    print request.args.get('phoneNumber','')
+    task = {
+        'id': phoneNumbers[-1]['id'] + 1,
+        'name': request.args.get('name', ""),
+        'phoneNumber': request.args.get('phoneNumber', ""),
+    }
+    phoneNumbers.append(task)
+
+    print('added phone number!')
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
