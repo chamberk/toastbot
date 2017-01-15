@@ -70,11 +70,11 @@ def toastLoop():
     global TOTAL_TOAST
     print("waiting on toast")
 
-    if TOTAL_TOAST == 0 && distance > 3000:
+    if TOTAL_TOAST == 0 and distance > 3000:
       print('toast going in')
       TOTAL_TOAST+=1
 
-    if TOTAL_TOAST == 1 && distance > 3000:
+    if TOTAL_TOAST == 1 and distance > 3000:
       print('your toast is done')
       TOTAL_TOAST+=1
       while TOTAL_TOAST > 1:
