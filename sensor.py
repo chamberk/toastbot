@@ -62,7 +62,7 @@ while True:
   print("TOASTER IS READY")
   print(str(toastCount))
 
- if toastCount == 1 and distance > 3000:
+ if toastCount == 1 and distance < 1000:
   toastCount+=1
   print("TOAST IS IN THE TOASTER")
   print(str(toastCount))
