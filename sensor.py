@@ -27,61 +27,65 @@ print("Waiting for sensor to settle.")
 
 time.sleep(2)
 
-#Continuously checking for range
+def loopFunction():
+    #Continuously checking for range
+    while True:
+     GPIO.output(TRIG, True)
+    # print("inside checking range")
+     time.sleep(0.1)
+     GPIO.output(TRIG, False)
+
+
+
+    # waiting the Echo
+    # print("before pulse start")  # debug statement
+     pulse_start = time.time()
+     while GPIO.input(ECHO)==0:
+      pulse_start = time.time()
+
+    # Pulse received
+     while GPIO.input(ECHO)==1:
+      pulse_end = time.time()
+     #  print("after pulse")  # debug statement
+      pulse_duration = pulse_end - pulse_start
+
+    # Calculating distance
+     distance = pulse_duration*17150
+     distance = round(distance, 2)
+     loopcount+=1
+
+    #Publish distance to some other thing
+
+     print(str(toastCount))
+
+     if toastCount == 0 and distance > 3000:
+      toastCount+=1
+      time.sleep(2)
+      print("TOASTER IS READY")
+      print(str(toastCount))
+
+     if toastCount == 1 and distance < 1000:
+      toastCount+=1
+      print("TOAST IS IN THE TOASTER")
+      print(str(toastCount))
+
+     if toastCount == 2 and distance > 3000:
+      toastCount+=1
+      print("TOAST IS DONE")
+      print(str(toastCount))
+      toastCount = 0
+      # print("TOAST IS DONEEEEEEEE")
+      # toast.sendsms_task()
+      # print("SMS SENT")
+      GPIO.cleanup()
+      # break;
+    # else:
+    #  toastCount = 0
+    #  print("READY FOR NEW TOAST")
+
+    # clean up and log out
+    #GPIO.cleanup()
+    # sys.exit()
+
 while True:
- GPIO.output(20, True)
-# print("inside checking range")
- time.sleep(0.1)
- GPIO.output(20, False)
-
-
-
-# waiting the Echo
-# print("before pulse start")  # debug statement
- pulse_start = time.time()
- while GPIO.input(ECHO)==0:
-  pulse_start = time.time()
-
-# Pulse received
- while GPIO.input(ECHO)==1:
-  pulse_end = time.time()
- #  print("after pulse")  # debug statement
-  pulse_duration = pulse_end - pulse_start
-
-# Calculating distance
- distance = pulse_duration*17150
- distance = round(distance, 2)
- loopcount+=1
-
-#Publish distance to some other thing
- 
- print(str(toastCount))
-
- if toastCount == 0 and distance > 3000:
-  toastCount+=1
-  time.sleep(2)
-  print("TOASTER IS READY")
-  print(str(toastCount))
-
- if toastCount == 1 and distance < 1000:
-  toastCount+=1
-  print("TOAST IS IN THE TOASTER")
-  print(str(toastCount))
-
- if toastCount == 2 and distance > 3000:
-  toastCount+=1
-  print("TOAST IS DONE")
-  print(str(toastCount))
-  toastCount = 0
-  # print("TOAST IS DONEEEEEEEE")
-  # toast.sendsms_task()
-  # print("SMS SENT")
-  GPIO.cleanup()
-  # break;
-# else:
-#  toastCount = 0
-#  print("READY FOR NEW TOAST")
-
-# clean up and log out
-#GPIO.cleanup()
-# sys.exit()
+    loopFunction()
