@@ -3,8 +3,8 @@ import time
 import sys
 import toast_request as toast
 
-loopcount = 0
-toastCount = 0
+# loopcount = 0
+# toastCount = 0
 GPIO.setmode(GPIO.BCM)
 
 #Variables for pins
@@ -27,7 +27,8 @@ print("Waiting for sensor to settle.")
 
 time.sleep(2)
 
-def loopFunction():
+def loopFunction(toastCount):
+    # global toastCount
     #Continuously checking for range
     while True:
      GPIO.output(TRIG, True)
@@ -52,7 +53,7 @@ def loopFunction():
     # Calculating distance
      distance = pulse_duration*17150
      distance = round(distance, 2)
-     loopcount+=1
+    #  loopcount+=1
 
     #Publish distance to some other thing
 
@@ -88,4 +89,5 @@ def loopFunction():
     # sys.exit()
 
 while True:
-    loopFunction()
+    toast = 0
+    loopFunction(toast)
