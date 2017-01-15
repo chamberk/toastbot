@@ -4,7 +4,7 @@ import sys
 import toast_request as toast
 
 loopcount = 0
-
+toastCount = 0
 GPIO.setmode(GPIO.BCM)
 
 #Variables for pins
@@ -54,11 +54,12 @@ while True:
  loopcount+=1
 
 #Publish distance to some other thing
- toastCount = 0
+ 
  print(str(toastCount))
 
  if toastCount == 0 and distance > 3000:
   toastCount+=1
+  time.sleep(2)
   print("TOASTER IS READY")
   print(str(toastCount))
 
@@ -76,9 +77,9 @@ while True:
   # print("SMS SENT")
   GPIO.cleanup()
   # break;
- else:
-  toastCount = 0
-  print("READY FOR NEW TOAST")
+# else:
+#  toastCount = 0
+#  print("READY FOR NEW TOAST")
 
 # clean up and log out
 #GPIO.cleanup()
