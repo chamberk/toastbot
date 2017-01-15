@@ -31,13 +31,13 @@ label {
 
 input {margin-bottom: 10px;}
 
-button.btn-block {
+input[type=submit].btn-block {
   background: blanchedalmond;
   border: 1px solid rgb(204,188,164);
   border-top: 3px solid rgb(204,188,164);;
 }
 
-button:hover {
+input[type=submit]:hover {
   background: tomato;
 }
 
