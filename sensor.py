@@ -33,7 +33,7 @@ while True:
 # print("inside checking range")
  time.sleep(0.1)
  GPIO.output(TRIG, False)
- 
+
 
 
 # waiting the Echo
@@ -55,15 +55,25 @@ while True:
 
 #Publish distance to some other thing
  toastCount = 0
- if distance > 3000:
+ print(str(toastCount))
+
+ if toastCount == 0 and distance > 3000:
   toastCount+=1
-  print("TOAST IS DONEEEEEEEE")
-  toast.sendsms_task()
-  print("SMS SENT")
+  print("TOAST IS IN THE TOASTER")
+  print(str(toastCount))
+
+ if toastCount == 1 and distance > 3000:
+  toastCount+=1
+  print("TOAST IS DONE")
+  print(str(toastCount))
+  # print("TOAST IS DONEEEEEEEE")
+  # toast.sendsms_task()
+  # print("SMS SENT")
   GPIO.cleanup()
   break;
  else:
   toastCount = 0
+  print("READY FOR NEW TOAST")
 
 # clean up and log out
 #GPIO.cleanup()
