@@ -29,10 +29,10 @@ time.sleep(2)
 
 #Continuously checking for range
 while True:
- GPIO.output(TRIG, True)
+ GPIO.output(20, True)
 # print("inside checking range")
  time.sleep(0.1)
- GPIO.output(TRIG, False)
+ GPIO.output(20, False)
 
 
 
@@ -72,6 +72,7 @@ while True:
   toastCount+=1
   print("TOAST IS DONE")
   print(str(toastCount))
+  toastCount = 0
   # print("TOAST IS DONEEEEEEEE")
   # toast.sendsms_task()
   # print("SMS SENT")
