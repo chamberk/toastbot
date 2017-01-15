@@ -15,6 +15,7 @@ bot_random = ["Start your day the toast way", "Get ready for some bomb toast", "
 bot_motivation = ["Teamwork makes the dreamwork!", "Get 'er done", "You can't have everything... Where would you put it?"]
 bot_stop = "no more toast"
 
+
 account_sid = "AC20bd86adfb5902d86362dcb908d40a01" # Your Account SID from www.twilio.com/console
 auth_token  = "xxxx"  # Your Auth Token from www.twilio.com/console
 
@@ -108,6 +109,7 @@ def toastbot():
         index = random.randrange(0, len(bot_random))
         resp.message(bot_random[index])
 
+
     return str(resp)
 
 @app.route('/deletePhoneNumber/<string:task_id>', methods=['GET'])
@@ -123,14 +125,17 @@ def delete_phone(task_id):
 
 @app.route('/')
 def signUp():
-    print request.args.get('name', "")
-    print request.args.get('phoneNumber','')
-    task = {
-        'id': phoneNumbers[-1]['id'] + 1,
-        'name': request.args.get('name', ""),
-        'phoneNumber': request.args.get('phoneNumber', ""),
-    }
-    phoneNumbers.append(task)
+    name = request.args.get('name', "")
+    print name
+    phoneNumber = request.args.get('phoneNumber','')
+    print phoneNumber
+    if len(name) and len(phoneNumber):
+        task = {
+            'id': phoneNumbers[-1]['id'] + 1,
+            'name': request.args.get('name', ""),
+            'phoneNumber': request.args.get('phoneNumber', ""),
+        }
+        phoneNumbers.append(task)
 
     print('added phone number!')
     return render_template('index.html')
