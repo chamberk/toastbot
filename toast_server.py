@@ -14,13 +14,13 @@ bot_greetings = ["howdy partner", "hiya pal", "hey buddy", "what's good homie?",
 bot_random = ["Start your day the toast way", "Get ready for some bomb toast", "Noms are on the way"]
 
 account_sid = "AC20bd86adfb5902d86362dcb908d40a01" # Your Account SID from www.twilio.com/console
-auth_token  = "4f05ce9b384b83391e162de446e3a3a8"  # Your Auth Token from www.twilio.com/console
+auth_token  = "its in slack"  # Your Auth Token from www.twilio.com/console
 
 phoneNumbers = [
     {
         'id': 1,
         'name': u'Christine',
-        'phoneNumber': u'15072542939'
+        'phoneNumber': u'not in slack'
     }
 #    },
 #    {
